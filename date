@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Compatibility Test™</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#ffeef5;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    width:90%;
+    max-width:500px;
+    text-align:center;
+}
+
+h1{
+    color:#ff4f81;
+}
+
+button{
+    background:#ff4f81;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:30px;
+    margin:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+    background:#eee;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.bar{
+    height:100%;
+    width:0%;
+    background:#ff4f81;
+    border-radius:10px;
+    transition:.4s;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="progress">
+    <div class="bar" id="bar"></div>
+</div>
+
+<div id="content">
+    <h1>🔬 Scientific Compatibility Test™</h1>
+    <p>Answer honestly. Our top scientists have worked for years on this.</p>
+    <button onclick="next()">Begin</button>
+</div>
+
+</div>
+
+<script>
+
+const steps = [
+
+{
+title:"Question 1",
+text:"Do you enjoy having fun?",
+buttons:["Yes","Absolutely"]
+},
+
+{
+title:"Question 2",
+text:"Do you like laughing?",
+buttons:["Of course","Definitely"]
+},
+
+{
+title:"Question 3",
+text:"Do you appreciate people with good taste?",
+buttons:["Yes","Obviously"]
+},
+
+{
+title:"Question 4",
+text:"Would you be open to meeting someone interesting?",
+buttons:["Maybe","Yes"]
+},
+
+{
+title:"Question 5",
+text:"Should our algorithm continue?",
+buttons:["Proceed","Proceed Faster"]
+}
+
+];
+
+let current=-1;
+
+function next(){
+
+current++;
+
+let percent=((current)/(steps.length+1))*100;
+document.getElementById("bar").style.width=percent+"%";
+
+if(current>=steps.length){
+showLoading();
+return;
+}
+
+let q=steps[current];
+
+document.getElementById("content").innerHTML=
+`
+<h1>${q.title}</h1>
+<p>${q.text}</p>
+<button onclick="next()">${q.buttons[0]}</button>
+<button onclick="next()">${q.buttons[1]}</button>
+`;
+
+}
+
+function showLoading(){
+
+document.getElementById("content").innerHTML=
+`
+<h1>Analyzing...</h1>
+<p>Consulting NASA...</p>
+`;
+
+let messages=[
+"Consulting NASA...",
+"Contacting FBI...",
+"Running advanced calculations...",
+"Checking relationship database...",
+"Finding perfect match..."
+];
+
+let i=0;
+
+let interval=setInterval(()=>{
+
+if(i<messages.length){
+document.querySelector("#content p").innerText=messages[i];
+i++;
+}
+else{
+clearInterval(interval);
+showResult();
+}
+
+},1000);
+
+}
+
+function showResult(){
+
+document.getElementById("bar").style.width="100%";
+
+document.getElementById("content").innerHTML=
+`
+<h1>🎉 Results Are In!</h1>
+
+<p>
+After extensive scientific research, our algorithm found:
+</p>
+
+<p>
+✅ You like fun<br>
+✅ You enjoy laughing<br>
+✅ You have excellent judgment
+</p>
+
+<h2>Compatibility Score: 99.7%</h2>
+
+<p>
+Recommendation:
+Give Soroush a chance 😌
+</p>
+
+<button onclick="yes()">Sure ❤️</button>
+<button id="noBtn" onmouseover="moveButton()">
+No 🙈
+</button>
+`;
+
+}
+
+function yes(){
+
+document.getElementById("content").innerHTML=
+`
+<h1>🥳 Excellent Choice!</h1>
+
+<p>
+The scientists are celebrating.
+</p>
+
+<p>
+You may now message Soroush.
+</p>
+
+<h2>❤️</h2>
+`;
+
+}
+
+function moveButton(){
+
+let btn=document.getElementById("noBtn");
+
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"vw";
+btn.style.top=Math.random()*80+"vh";
+
+}
+
+</script>
+
+</body>
+</html>
